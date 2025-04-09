@@ -71,11 +71,11 @@ commands:
       - run:
           name: Install Node.js
           command: |
-            curl -sL https://deb.nodesource.com/setup_13.x | bash -
+            curl -sL https://deb.nodesource.com/setup_20.x | bash -
             apt-get update && apt-get install -y nodejs
       - run:
           name: Install serverless CLI
-          command: npm i -g serverless
+          command: npm i -g serverless@^3
       - run:
           name: Build lambda
           command: |
@@ -86,7 +86,7 @@ commands:
           name: Deploy lambda
           command: |
             cd ./AssetIndexUpdateApi/
-            sls deploy --stage <<parameters.stage>> --account <<parameters.aws-account>> --conceal
+            sls remove --stage <<parameters.stage>> --account <<parameters.aws-account>> --verbose
 
 jobs:
   check-code-formatting:
